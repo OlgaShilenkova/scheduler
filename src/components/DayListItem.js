@@ -30,7 +30,7 @@ export default function DayListItem(props) {
         setDay(name);
       }}
     >
-      <h2 className="text--regular">Day {name}</h2>
+      <h2 className="text--regular">{name}</h2>
       <h3 className="text--light">{formatSpots()}</h3>
     </li>
   );
