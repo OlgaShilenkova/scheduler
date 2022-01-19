@@ -1,6 +1,7 @@
 import React from "react";
 import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
+import InterviewerList from "components/InterviewerList";
 import InterviewerListItem from "components/InterviewerListItem";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
