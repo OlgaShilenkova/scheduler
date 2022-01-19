@@ -4,6 +4,7 @@ import classNames from "classnames";
 
 export default function InterviewerListItem(props) {
   const { id, name, avatar, selected, setInterviewer } = props;
+  console.log("name", name);
   const interviewersClass = classNames({
     interviewers__item: true,
     "interviewers__item--selected": selected,
@@ -17,11 +18,8 @@ export default function InterviewerListItem(props) {
       }}
     >
       <img className="interviewers__item-image" src={avatar} alt={name} />
-      {name}
-
-      {/* only if selected show the name {selected && { name }} */}
-
-      {/* {selected ? { name } : <>no name </>} */}
+      {/* only if selected show the name, don't use name in {}  */}
+      {selected && name}
     </li>
   );
 }
