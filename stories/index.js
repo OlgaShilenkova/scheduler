@@ -1,4 +1,7 @@
 import React from "react";
+import Empty from "components/Appointment/Empty";
+import Header from "components/Appointment/Header";
+import Appointment from "components/Appointment/index.js";
 import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerList from "components/InterviewerList";
@@ -60,13 +63,13 @@ storiesOf("DayList", module)
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
   })
   .add("Monday", () => (
-    <DayList days={days} day={"Monday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Monday"} onChange={action("setDay")} />
   ))
   .add("Tuesday", () => (
-    <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Tuesday"} onChange={action("setDay")} />
   ))
   .add("Wednesday", () => (
-    <DayList days={days} day={"Wednesday"} setDay={action("setDay")} />
+    <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
   ));
 //story for Interviewer List Item
 const interviewer = {
@@ -96,10 +99,9 @@ storiesOf("InterviewerListItem", module)
   ))
   .add("Clickable", () => (
     <InterviewerListItem
-      id={interviewer.id}
       name={interviewer.name}
       avatar={interviewer.avatar}
-      setInterviewer={action("setInterviewer")}
+      setInterviewer={() => action("setInterviewer")(interviewer.id)}
     />
   ));
 //story for Interviewer List
@@ -117,11 +119,25 @@ storiesOf("InterviewerList", module)
   })
   .add("Initial", () => <InterviewerList interviewers={interviewers} />)
   .add("Selected", () => (
-    <InterviewerList interviewers={interviewers} interviewer={3} />
+    <InterviewerList interviewers={interviewers} value={3} />
   ))
   .add("Clickable", () => (
     <InterviewerList
       interviewers={interviewers}
-      setInterviewer={action("setInterviewer")}
+      onChange={action("setInterviewer")}
     />
   ));
+//story for Appointment
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }],
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => <Appointment time="12pm" />)
+  //story for Header inside Appontment
+  .add("Header with Time", () => <Header time="12pm" />)
+  //story for Empty inside Appontment
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />);
+
+// .add("Clickable", () => (
+//   <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
