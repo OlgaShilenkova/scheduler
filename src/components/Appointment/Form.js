@@ -3,51 +3,61 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 export default function Form(props) {
-  const [student, setStudent] = useState(student || "");
-  const [interviewer, setInterviewer] = useState(interviewer || null);
+  const [student, setStudent] = useState(props.student || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
-  let { interviewers, onSave, onCancel } = props;
-  console.log("props of FORM:", props);
+  const { interviewers, onSave, onCancel } = props;
   //was
   //const { student,interviewer, interviewers, onSave, onCancel } = props
+
+  const reset = () => {
+    setStudent("");
+    setInterviewer(null);
+  };
+
+  const cancel = () => {
+    reset();
+    onCancel();
+  };
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off">
+        <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
             placeholder="Enter Student Name"
             //turn into controlled component
-            value={props.student}
+            value={student}
             onChange={(event) => {
               setStudent(event.target.value);
             }}
           />
         </form>
-        {/* <InterviewerList */}
-        {/* your code goes here */}
-        {/* interviewers={interviewers}
-          value={props.interviewer}
-          onChange={(event) => {
-            setInterviewer(event.target.value);
-          }}
-        /> */}
+        <InterviewerList
+          interviewers={interviewers}
+          value={interviewer}
+          // pass down new value from the hook [interviewer, setInterviewer]
+          onChange={setInterviewer}
+        />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button
             danger
-            // {/* your code goes here */ }
-            onClick={onCancel}
+            // fn should be passed as a callback ? or no
+            // onClick={cancel}
+            onClick={() => cancel()}
           >
             Cancel
           </Button>
           <Button
             confirm
-            // {/* your code goes here */ }
+            // OR NO ?
             onClick={onSave}
+            // onClick={() => onSave()}
           >
             Save
           </Button>
@@ -56,6 +66,13 @@ export default function Form(props) {
     </main>
   );
 }
+
+// From Frances BreakOut
+// parent Component
+/* <Button danger onClick={() => console.log("what's up")}>Hello!</Button> */
+// props {danger:true, onClick:() => console.log("what's up")}
+// child Component
+// return <button style={buttonStyle} onClick={props.onClick}>{props.children}</button>;
 
 // As part of our Edit story, the Form component should take the following props:
 
@@ -78,3 +95,4 @@ export default function Form(props) {
 
 // setStudent:Function
 // setInterviewer:Function
+//
