@@ -1,4 +1,9 @@
 import React from "react";
+import Form from "components/Appointment/Form";
+import Error from "components/Appointment/Error";
+import Status from "components/Appointment/Status";
+import Confirm from "components/Appointment/Confirm";
+import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 import Header from "components/Appointment/Header";
 import Appointment from "components/Appointment/index.js";
@@ -137,7 +142,34 @@ storiesOf("Appointment", module)
   //story for Header inside Appontment
   .add("Header with Time", () => <Header time="12pm" />)
   //story for Empty inside Appontment
-  .add("Empty", () => <Empty onAdd={action("onAdd")} />);
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
+  // story for Show inside Appointment
+  .add("Show", () => <Show onEdit={action("onEdit")} />)
+  .add("Show", () => <Show onDelete={action("onDelete")} />)
+  // story for Confirm inside Appointment
+  .add("Confirm", () => <Confirm onConfirm={action("onConfirm")} />)
+  .add("Confirm", () => <Confirm onDelete={action("onDelete")} />)
+  // story for Status inside Appointment
+  .add("Status with message", () => <Status message="Deleting" />)
+  // story for Error inside Appointment
+  .add("Error", () => <Error onClose={action("onClose")} />)
+  // story for Form inside Appointment
+  .add("Form", () => <Form />)
+  .add("Form", () => (
+    <Form student="Olga" interviewer="1234" interviewers={interviewers} />
+  ))
+  .add("Form", () => <Form onSave={action("onSave")} />)
+  .add("Form", () => <Form onCancel={action("onCancel")} />);
 
 // .add("Clickable", () => (
 //   <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
+
+// student:String
+// interviewer:Number
+// interviewers:Array
+// onSave:Function
+// onCancel:Function
+
+// interviewers:Array
+// onSave:Function
+// onCancel:Function
