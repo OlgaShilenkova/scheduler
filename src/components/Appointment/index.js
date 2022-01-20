@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./styles.scss";
 import Confirm from "./Confirm";
 import Empty from "./Empty";
@@ -9,10 +9,16 @@ import Show from "./Show";
 import Status from "./Status";
 
 export default function Appointment(props) {
-  console.log("props", props);
+  const { time, interview, student, interviewer } = props;
+
   return (
     <article className="appointment">
-      <Form interviewers={props.interviewers} />
+      <Header time={time} />
+      {interview ? (
+        <Show student={student} interviewer={interviewer} />
+      ) : (
+        <Empty />
+      )}
     </article>
   );
 }

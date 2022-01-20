@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Form from "components/Appointment/Form";
 import Error from "components/Appointment/Error";
 import Status from "components/Appointment/Status";
@@ -154,15 +154,41 @@ storiesOf("Appointment", module)
   // story for Error inside Appointment
   .add("Error", () => <Error onClose={action("onClose")} />)
   // story for Form inside Appointment
-  .add("Form", () => <Form />)
-  .add("Form", () => (
-    <Form student="Olga" interviewer="1234" interviewers={interviewers} />
+  .add("Edit Form", () => (
+    <Form
+      student="Olga"
+      interviewer={1}
+      interviewers={interviewers}
+      onSave={action("onSave")}
+      onCancel={action("onCancel")}
+    />
   ))
-  .add("Form", () => <Form onSave={action("onSave")} />)
-  .add("Form", () => <Form onCancel={action("onCancel")} />);
 
-// .add("Clickable", () => (
-//   <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
+  .add("Create Form", () => (
+    <Form
+      interviewers={interviewers}
+      onSave={action("onSave")}
+      onCancel={action("onCancel")}
+    />
+  ))
+  //Appointment Empty story
+  .add("Appointment Empty", () => (
+    <Fragment>
+      <Appointment id={1} time="4pm" />
+      <Appointment time="5pm" />
+    </Fragment>
+  ))
+  //Booked stiry
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="4pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer }}
+      />
+      <Appointment time="5pm" />
+    </Fragment>
+  ));
 
 // student:String
 // interviewer:Number
