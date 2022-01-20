@@ -76,8 +76,8 @@ The Form component should have the following actions:
 # InterviewerList
 
 - interviewers: Array
-- onChange / was - setInterviewer
-- value / was - interviewer
+- onChange / was - setInterviewer : Funct
+- value / was - interviewer : Number
 
 # InterviewerListItem
 
