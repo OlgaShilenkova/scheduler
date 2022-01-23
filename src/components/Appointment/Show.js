@@ -7,7 +7,7 @@ export default function Show(props) {
   //   name: "Sylvia Palmer",
   //   avatar: "https://i.imgur.com/LpaY82x.png",
   // };
-  console.log("props", props);
+  // console.log("props", props);
   return (
     <main className="appointment__card appointment__card--show">
       <section className="appointment__card-left">
