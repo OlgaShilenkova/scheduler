@@ -1,18 +1,14 @@
-// for reference
-
-// function selectUserByName(state, name) {
-//   const filteredNames = state.users.filter(user => user.name === name);
-//   return filteredNames;
-// }
+//
+//1
 //
 //have to use find instead filter
+// SHORT MENTORS VERSION
 // export function getAppointmentsForDay(state, day) {
 //   const sameDay = state.days.find((d) => d.name === day);
 //   if (state.days.length === 0 || sameDay === undefined) return [];
 //   return sameDay.appointments.map((id) => state.appointments[id]);
 // }
 
-//
 //MY VERSION did not work with FETCHing from server data => have to use find instead filter
 //
 // ... returns an array of appointments for that day
@@ -36,33 +32,51 @@ export function getAppointmentsForDay(state, day) {
   return matchingAppointments;
 }
 
-//for  reference
-// const state = {
-//   days: [
-//     {
-//       id: 1,
-//       name: "Monday",
-//       appointments: [1, 2, 3]
-//     },
-//     {
-//       id: 2,
-//       name: "Tuesday",
-//       appointments: [4, 5]
-//     }
-//   ],
-//   appointments: {
-//     "1": { id: 1, time: "12pm", interview: null },
-//     "2": { id: 2, time: "1pm", interview: null },
-//     "3": {
-//       id: 3,
-//       time: "2pm",
-//       interview: { student: "Archie Cohen", interviewer: 2 }
-//     },
-//     "4": { id: 4, time: "3pm", interview: null },
-//     "5": {
-//       id: 5,
-//       time: "4pm",
-//       interview: { student: "Chad Takahashi", interviewer: 2 }
+//
+//2
+//
+//The function should return a new object containing the interview data when we pass it an object that contains the interviewer. Otherwise, the function should return null.
+// interview: { student: "Archie Cohen", interviewer: 2 },
+
+export function getInterview(state, interview) {
+  if (!interview) return null;
+  return {
+    student: interview.student,
+    interviewer: state.interviewers[interview.interviewer],
+  };
+}
+
+// The component is designed to accept appointment objects as:
+// {
+//   "id":1,
+//   "time":"12pm",
+//   "interview": {
+//     "student": "Lydia Miller-Jones",
+//     "interviewer": {
+//       "id": 1,
+//       "name": "Sylvia Palmer",
+//       "avatar": "https://i.imgur.com/LpaY82x.png"
 //     }
 //   }
-// };
+// }
+
+// The API is designed to reduce the duplication of data. If there are two interviews with the same interviewer, they will use the same id as a reference.
+// single appointment FROM API
+// {
+//   "id":1,
+//   "time":"12pm",
+//   "interview": {
+//     "student": "Lydia Miller-Jones",
+//     "interviewer": 1
+//   }
+// }
+
+//should return
+// {
+//   "student": "Lydia Miller-Jones",
+//   "interviewer": {
+//     "id": 1,
+//     "name": "Sylvia Palmer",
+//     "avatar": "https://i.imgur.com/LpaY82x.png"
+//   }
+// }
