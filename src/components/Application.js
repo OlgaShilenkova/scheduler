@@ -3,7 +3,7 @@ import axios from "axios";
 import Appointment from "./Appointment";
 import "components/Application.scss";
 import DayList from "./DayList";
-import { getAppointmentsForDay } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 
 //mock data for appointments
 // const appointments = [
@@ -46,26 +46,18 @@ import { getAppointmentsForDay } from "helpers/selectors";
 // ];
 
 export default function Application() {
-  //was
-  // const [days, setDays] = useState([]);
-  // const [day, setDay] = useState("Monday");
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
   });
-  let dailyAppointments = [];
-  dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  // let dailyAppointments = [];
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const setDay = (day) => setState({ ...state, day });
 
   useEffect(() => {
-    // was
-    // const url = `/api/days`;
-    // axios.get(url).then((response) => {
-    //   // setDays([...response.data]);
-    // });
-
     Promise.all([
       axios.get("/api/days"),
       axios.get("api/appointments"),
@@ -80,9 +72,17 @@ export default function Application() {
     });
   }, []);
 
-  const parsedInterview = dailyAppointments.map((currentAppontment) => (
-    <Appointment key={currentAppontment.id} {...currentAppontment} />
-  ));
+  const schedule = dailyAppointments.map((currentAppontment) => {
+    const interview = getInterview(state, currentAppontment.interview);
+
+    return (
+      <Appointment
+        key={currentAppontment.id}
+        {...currentAppontment}
+        interview={interview}
+      />
+    );
+  });
 
   return (
     <main className="layout">
@@ -103,7 +103,7 @@ export default function Application() {
         />
       </section>
       <section className="schedule">
-        {parsedInterview}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
