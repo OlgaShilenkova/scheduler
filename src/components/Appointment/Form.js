@@ -45,19 +45,12 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button
-            danger
-            // fn should be passed as a callback ? or no
-            // onClick={cancel}
-            onClick={() => cancel()}
-          >
+          <Button danger onClick={cancel}>
             Cancel
           </Button>
           <Button
             confirm
-            // OR NO ?
-            onClick={onSave}
-            // onClick={() => onSave()}
+            onClick={() => onSave(student, interviewer)}
             // onCancel={back(EMPTY)}
           >
             Save

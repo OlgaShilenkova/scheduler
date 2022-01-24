@@ -3,7 +3,11 @@ import axios from "axios";
 import Appointment from "./Appointment";
 import "components/Application.scss";
 import DayList from "./DayList";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "helpers/selectors";
 
 //mock data for appointments
 // const appointments = [
@@ -50,12 +54,33 @@ export default function Application() {
     day: "Monday",
     days: [],
     appointments: {},
+    interviewers: {},
   });
 
   // let dailyAppointments = [];
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const setDay = (day) => setState({ ...state, day });
+
+  function bookInterview(appointmentId, interviewObj) {
+    console.log(appointmentId, interviewObj);
+
+    const newAppointment = {
+      ...state.appointments[appointmentId],
+      interview: interviewObj,
+    };
+
+    const newAppointments = {
+      ...state.appointments,
+      [appointmentId]: newAppointment,
+    };
+
+    // setState((prev) => ({ ...prev, appointments: newAppointments }));
+
+    return axios
+      .put(`/api/appointments/${appointmentId}`, newAppointments[appointmentId])
+      .then(setState({ ...state, appointments: newAppointments }));
+  }
 
   useEffect(() => {
     Promise.all([
@@ -72,14 +97,18 @@ export default function Application() {
     });
   }, []);
 
-  const schedule = dailyAppointments.map((currentAppontment) => {
-    const interview = getInterview(state, currentAppontment.interview);
+  const interviewers = getInterviewersForDay(state, state.day);
+
+  const schedule = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
 
     return (
       <Appointment
-        key={currentAppontment.id}
-        {...currentAppontment}
+        key={appointment.id}
+        {...appointment}
         interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
@@ -109,3 +138,18 @@ export default function Application() {
     </main>
   );
 }
+
+// for reference
+// state object
+// {
+//   day: "",
+//   days: [],
+//   appointments: {
+//     "1": {
+//       id: 1,
+//       time: "12pm",
+//       interview: null
+//     }
+//   },
+//   interviewers: {}
+// }

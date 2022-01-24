@@ -27,10 +27,12 @@
 
 # Empty
 
+- bookInterview
 - onAdd : Funct
 
 # Show
 
+- bookInterview
 - student: String eg. "Lydia Miller-Jones"
 - interviewer: Object we can use the interview object that already exists in stories/index.js for this
 - onEdit: Function to be called when the user clicks the Edit button
@@ -38,22 +40,26 @@
 
 # Confirm
 
+- bookInterview
 - message: String eg. "Delete the appointment?"
 - onConfirm: Function to be called when the user clicks the Confirm button
 - onCancel: Function to be called when the user clicks the Cancel button
 
 # Status
 
+- bookInterview
 - message:String eg. "Deleting"
 
 # Error
 
+- bookInterview
 - message:String eg. "Could not delete appointment."
 - onClose:Function to be called when the user clicks the Close button
 
 # Form
 
-As part of our Edit story, the Form component should take the following props:
+- bookInterview
+  As part of our Edit story, the Form component should take the following props:
 
 - student: String
 - interviewer: Number

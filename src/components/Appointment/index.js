@@ -13,23 +13,23 @@ import { useVisualMode } from "hooks/useVisualMode";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  const interviewers = [
-    // {
-    //   id: 1,
-    //   name: "Sylvia Palmer",
-    //   avatar: "https://i.imgur.com/LpaY82x.png",
-    // },
-    // {
-    //   id: 2,
-    //   name: "Tori Malcolm",
-    //   avatar: "https://i.imgur.com/Nmx0Qxo.png",
-    // },
-  ];
+
+  function save(student, interviewer) {
+    // console.log(`student,interviewer `);
+    console.log(student, interviewer);
+    const interview = {
+      student,
+      interviewer,
+    };
+    transition(SAVING);
+    props.bookInterview(props.id, interview).then(() => transition(SHOW));
+  }
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -44,12 +44,9 @@ export default function Appointment(props) {
         />
       )}
       {mode === CREATE && (
-        <Form
-          onCancel={() => back()}
-          // onSave={}
-          interviewers={interviewers}
-        />
+        <Form onCancel={back} onSave={save} interviewers={props.interviewers} />
       )}
+      {mode === SAVING && <Status message="Saving..." />}
     </article>
   );
 }
