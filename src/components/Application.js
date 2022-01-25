@@ -62,9 +62,8 @@ export default function Application() {
 
   const setDay = (day) => setState({ ...state, day });
 
+  //Creating Appointment
   function bookInterview(appointmentId, interviewObj) {
-    console.log(appointmentId, interviewObj);
-
     const newAppointment = {
       ...state.appointments[appointmentId],
       interview: interviewObj,
@@ -77,9 +76,41 @@ export default function Application() {
 
     // setState((prev) => ({ ...prev, appointments: newAppointments }));
 
+    return (
+      axios
+        .put(
+          `/api/appointments/${appointmentId}`,
+          newAppointments[appointmentId]
+        )
+        // .then(setState((prev) => ({ ...prev, appointments: newAppointments })));
+        .then(setState({ ...state, appointments: newAppointments }))
+    );
+  }
+
+  //Deleting an Interview
+  function cancelInterview(appointmentId, interviewObj) {
+    console.log(`deleting appointmentId, interviewObj ==>`);
+    console.log(appointmentId, interviewObj);
+    //set interview to null
+    const newAppointment = {
+      ...state.appointments[appointmentId],
+      interview: null,
+    };
+
+    //update old appoint. list with new note
+    const newAppointments = {
+      ...state.appointments,
+      [appointmentId]: newAppointment,
+    };
+
+    //delete from db
     return axios
-      .put(`/api/appointments/${appointmentId}`, newAppointments[appointmentId])
+      .delete(
+        `/api/appointments/${appointmentId}`,
+        newAppointments[appointmentId]
+      )
       .then(setState({ ...state, appointments: newAppointments }));
+    // .then(setState((prev) => ({ ...prev, appointments: newAppointments })))
   }
 
   useEffect(() => {
@@ -109,6 +140,7 @@ export default function Application() {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });

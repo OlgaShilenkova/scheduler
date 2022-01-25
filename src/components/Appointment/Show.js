@@ -23,7 +23,7 @@ export default function Show(props) {
             className="appointment__actions-button"
             src="images/edit.png"
             alt="Edit"
-            onClick={onEdit} // does not work onEdit only onDelete
+            onClick={onEdit}
           />
           <img
             className="appointment__actions-button"

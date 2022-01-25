@@ -20,6 +20,9 @@
 - id
 - time:
 - interview
+- interviewers
+- bookInterview
+- cancelInterview
 
 # Header
 
