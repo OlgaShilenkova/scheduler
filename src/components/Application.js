@@ -77,13 +77,22 @@ export default function Application() {
     // setState((prev) => ({ ...prev, appointments: newAppointments }));
 
     return (
+      //   //API server with test error
+      //   axios.put(`/api/appointments/${appointmentId}`, (request, response) => {
+      //     if (process.env.TEST_ERROR) {
+      //       setTimeout(() => response.status(500).json({}), 1000);
+      //       return;
+      //     }
+      //   })
+      // );
       axios
         .put(
           `/api/appointments/${appointmentId}`,
           newAppointments[appointmentId]
         )
-        // .then(setState((prev) => ({ ...prev, appointments: newAppointments })));
-        .then(setState({ ...state, appointments: newAppointments }))
+        .then(setState((prev) => ({ ...prev, appointments: newAppointments })))
+        // .then(setState({ ...state, appointments: newAppointments }))
+        .catch((error) => error.response)
     );
   }
 
@@ -104,13 +113,25 @@ export default function Application() {
     };
 
     //delete from db
-    return axios
-      .delete(
-        `/api/appointments/${appointmentId}`,
-        newAppointments[appointmentId]
-      )
-      .then(setState({ ...state, appointments: newAppointments }));
-    // .then(setState((prev) => ({ ...prev, appointments: newAppointments })))
+    return (
+      //API server with test error
+      axios.put(`/api/appointments/${appointmentId}`, (request, response) => {
+        if (process.env.TEST_ERROR) {
+          setTimeout(() => response.status(500).json({}), 1000);
+          return;
+        }
+      })
+    );
+
+    //   axios
+    //     .delete(
+    //       `/api/appointments/${appointmentId}`,
+    //       newAppointments[appointmentId]
+    //     )
+    //     // then(setState((prev) => ({ ...prev, appointments: newAppointments })))
+    //     .then(setState({ ...state, appointments: newAppointments }))
+    //     .catch((error) => error.response)
+    // );
   }
 
   useEffect(() => {
