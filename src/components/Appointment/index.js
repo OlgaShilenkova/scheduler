@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "./styles.scss";
 import Confirm from "./Confirm";
 import Empty from "./Empty";
@@ -24,9 +24,7 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  console.log(`props.interview ===>`);
-  console.log(props.interview);
-
+  console.log(`props from Appointment`, props);
   //Save new interview
   function save(student, interviewer) {
     const interview = {
@@ -37,7 +35,7 @@ export default function Appointment(props) {
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch((error) => transition(ERROR_SAVE, true));
+      .catch(() => transition(ERROR_SAVE, true));
   }
 
   //Delete

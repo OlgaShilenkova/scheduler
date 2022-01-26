@@ -9,6 +9,7 @@ import {
 } from "helpers/selectors";
 import useApplicationData from "hooks/useApplicationData";
 
+// Rendering Logic
 export default function Application(props) {
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
@@ -41,11 +42,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList
-            days={state.days}
-            day={state.day} //value={state.day}
-            aetday={setDay} //onChange={setDay}
-          />
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
