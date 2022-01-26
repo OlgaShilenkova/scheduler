@@ -14,48 +14,33 @@ export default function useApplicationData() {
 
   // Update Interview Spots
   function updateSpots(requestType) {
+    console.log("state.day", state.day);
     //reach to particular day
-    const rightDay = state.days.find((day) => {
+    const rightDay = state.days.map((day) => {
       if (day.name === state.day) {
         //if we booking -> decrease spots number
         if (requestType === "bookInterview") {
-          return { ...rightDay, spots: rightDay.spots - 1 };
+          return { ...day, spots: day.spots - 1 };
         } else {
-          return { ...rightDay, spots: rightDay.spots + 1 };
+          return { ...day, spots: day.spots + 1 };
         }
       } else {
-        return { ...rightDay };
+        return { ...day };
       }
-      // return rightDay;
     });
+    return rightDay;
   }
-
-  /*
-    //reach to appountments id of that day
-
-    const appointmentsOfTheDay = rightDay.appointments;
-    for (const app of appointmentsOfTheDay)
-
-    //reach to interview value
-    const statusInterview = state.appointments[appointmentId].interview;
-    console.log("hasInterview", hasInterview);
-
-    console.log(`appointmentId, interviewObj`);
-    console.log(appointmentId, interviewObj);
-    console.log(`state.days, state.day`);
-    console.log(state.days, state.day);
-*/
 
   //Creating Appointment
   function bookInterview(appointmentId, interviewObj) {
     // make clone of appointment
     const newAppointment = {
       ...state.appointments[appointmentId],
-      // interview: interviewObj,
+      interview: interviewObj,
     };
 
     //reach to interview value before changies
-    const statusInterview = newAppointment.interview;
+    // const statusInterview = newAppointment.interview;
     //clone new Interview
     newAppointment.interview = { ...interviewObj };
     let days = [...state.days];
@@ -70,16 +55,16 @@ export default function useApplicationData() {
       .put(`/api/appointments/${appointmentId}`, newAppointments[appointmentId])
       .then(() => {
         // statusInterview is null -> update spot counter in days
-        if (!statusInterview) {
-          days = updateSpots("bookInterview");
-        }
+        // if (!statusInterview) {
+        days = updateSpots("bookInterview");
+        // }
         setState((prev) => ({ ...prev, appointments: newAppointments, days }));
       })
       .catch((error) => error.response);
   }
 
   //Deleting an Interview
-  function cancelInterview(appointmentId, interviewObj) {
+  function cancelInterview(appointmentId) {
     //set interview to null
     const newAppointment = {
       ...state.appointments[appointmentId],
@@ -99,8 +84,11 @@ export default function useApplicationData() {
         // newAppointments[appointmentId] // does not impact
       )
       .then(() => {
-        const days = updateSpots(); // need to refresh to see spots update after deletion
-        setState({ ...state, appointments: newAppointments, days }); // does not impact having PREV or not
+        const days = updateSpots("deleteInterview"); // need to refresh to see spots update after deletion
+        console.log("days", days);
+        setState((prev) => {
+          setState({ ...state, appointments: newAppointments, days });
+        }); // does not impact having PREV or not
       })
       .catch((error) => error.response);
   }

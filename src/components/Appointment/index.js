@@ -24,7 +24,8 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-  console.log(`props from Appointment`, props);
+  // console.log(`props from Appointment`, props);
+
   //Save new interview
   function save(student, interviewer) {
     const interview = {
@@ -50,6 +51,7 @@ export default function Appointment(props) {
   //Confirm deletion of interview
   // spinner -> delete -> empty
   function reallyDeleteInterview(event) {
+    console.log("props", props);
     transition(DELETING, true);
     props
       .cancelInterview(props.id)

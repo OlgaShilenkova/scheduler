@@ -2,11 +2,10 @@ import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
 import "./InterviewerList.scss";
 
-export default function InterviewerList(props) {
+function InterviewerList(props) {
   const { interviewers, onChange, value } = props;
   //was
   // const { interviewers, setInterviewer, interviewer } = props;
-
   const parsedInterviewerList = interviewers.map((currentInterviewer) => {
     return (
       <InterviewerListItem
@@ -25,3 +24,9 @@ export default function InterviewerList(props) {
     </section>
   );
 }
+//ReferenceError: PropTypes is not defined
+// InterviewerList.propTypes = {
+//   interviewers: PropTypes.array.isRequired,
+// };
+
+export default InterviewerList;
