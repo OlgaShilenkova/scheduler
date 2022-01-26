@@ -1,6 +1,7 @@
 import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
 import "./InterviewerList.scss";
+import PropTypes from "prop-types";
 
 function InterviewerList(props) {
   const { interviewers, onChange, value } = props;
@@ -25,8 +26,8 @@ function InterviewerList(props) {
   );
 }
 //ReferenceError: PropTypes is not defined
-// InterviewerList.propTypes = {
-//   interviewers: PropTypes.array.isRequired,
-// };
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array.isRequired,
+};
 
 export default InterviewerList;
