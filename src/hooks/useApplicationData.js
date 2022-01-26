@@ -14,7 +14,6 @@ export default function useApplicationData() {
 
   // Update Interview Spots
   function updateSpots(requestType) {
-    console.log("state.day", state.day);
     //reach to particular day
     const rightDay = state.days.map((day) => {
       if (day.name === state.day) {
@@ -79,15 +78,11 @@ export default function useApplicationData() {
 
     //delete from db
     return axios
-      .delete(
-        `/api/appointments/${appointmentId}`
-        // newAppointments[appointmentId] // does not impact
-      )
+      .delete(`/api/appointments/${appointmentId}`)
       .then(() => {
-        const days = updateSpots("deleteInterview"); // need to refresh to see spots update after deletion
-        console.log("days", days);
+        const days = updateSpots("deleteInterview");
         setState((prev) => {
-          setState({ ...state, appointments: newAppointments, days });
+          setState({ ...prev, appointments: newAppointments, days });
         }); // does not impact having PREV or not
       })
       .catch((error) => error.response);
