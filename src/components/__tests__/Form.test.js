@@ -69,6 +69,7 @@ describe("Form", () => {
     /* 5. onSave is not called */
     expect(onSave).not.toHaveBeenCalled();
   });
+
   //5
   it("can successfully save after submitting with empty student and given interviewer", () => {
     /* 1. Create the mock onSave function */
@@ -127,5 +128,42 @@ describe("Form", () => {
     /* 5. onSave is called once with proper values */
     expect(onSave).toHaveBeenCalledTimes(1);
     expect(onSave).toHaveBeenCalledWith("Pedro", 4);
+  });
+
+  //7
+  it("calls onCancel and resets the input field", () => {
+    /* 1. Create the mock onSave function */
+    const onSave = jest.fn();
+    const onCancel = jest.fn();
+
+    /* 2. Render */
+    const { getByText, queryByText, getByPlaceholderText } = render(
+      <Form
+        interviewers={interviewers}
+        student="OlgaShilenk"
+        interviewer={5}
+        onSave={onSave}
+        onCancel={onCancel}
+      />
+    );
+    /*3. Click the save button */
+    fireEvent.click(getByText("Save"));
+
+    /* 4. change the input value for student name */
+    fireEvent.change(getByPlaceholderText("Enter Student Name"), {
+      target: { value: "Olga" },
+    });
+
+    /*5. Click the Cancel button */
+    fireEvent.click(getByText("Cancel"));
+
+    /* 6. validation is not shown */
+    expect(queryByText(/student name cannot be blank/i)).toBeNull();
+
+    /* 7. resets the input */
+    expect(getByPlaceholderText("Enter Student Name")).toHaveValue("");
+
+    /* 7. onCancel is called once  */
+    expect(onCancel).toHaveBeenCalledTimes(1);
   });
 });
