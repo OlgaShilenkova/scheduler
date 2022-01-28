@@ -13,7 +13,7 @@
 
 !["edit or cancel appointment"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/edit-or-cancel-appointment.png?raw=true)
 
-!["re-ask befor deletion"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/reask-about-deletion.png?raw=true)
+!["re-ask befor deletion"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/reask-befor-deletion.png?raw=true)
 
 ## Technical Specifications
 
