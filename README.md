@@ -1,17 +1,25 @@
-**Interview Scheduler**
+## Interview Scheduler
 
 - Development focuses on a single page application (SPA), built using React.
 - Data is persisted by the API server using a PostgreSQL database.
 - The client application communicates with an API server over HTTP, using the JSON format.
 - Jest tests are used through the development of the project.
 
-**Final Product**
+## Final Product
 
-!["screenshot description"](#)
+!["main view"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/main-view.png?raw=true)
 
-!["screenshot description"](#)
+!["full view"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/full-view.png?raw=true)
 
-**Technical Specifications**
+!["book appointment"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/book-appointment.png?raw=true)
+
+!["edit or cancel appointment"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/edit-or-cancel-appointment.png?raw=true)
+
+!["re-ask befor deletion"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/reask-about-deletion.png?raw=true)
+
+!["create appointment"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/create-appointment.png?raw=true)
+
+## Technical Specifications
 
 - React
 - Webpack,Babel
