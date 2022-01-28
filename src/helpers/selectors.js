@@ -11,7 +11,6 @@ export function getAppointmentsForDay(state, day) {
   if (state.days.length === 0 || sameDay === undefined) return [];
 
   // take appointment array for the given day, we'll need to iterate through it, comparing where it's id matches the id of states.appointments and return that value.
-
   const matchingAppointments = [];
   for (let app of sameDay.appointments) {
     let propertyName = app;

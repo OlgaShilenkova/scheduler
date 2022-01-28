@@ -38,8 +38,6 @@ export default function useApplicationData() {
       interview: interviewObj,
     };
 
-    //reach to interview value before changies
-    // const statusInterview = newAppointment.interview;
     //clone new Interview
     newAppointment.interview = { ...interviewObj };
     let days = [...state.days];
@@ -53,10 +51,8 @@ export default function useApplicationData() {
     return axios
       .put(`/api/appointments/${appointmentId}`, newAppointments[appointmentId])
       .then(() => {
-        // statusInterview is null -> update spot counter in days
-        // if (!statusInterview) {
+        //update spot counter in days
         days = updateSpots("bookInterview");
-        // }
         setState((prev) => ({ ...prev, appointments: newAppointments, days }));
       })
       .catch((error) => error.response);

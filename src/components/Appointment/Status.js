@@ -9,13 +9,7 @@ export default function Status(props) {
         src="images/status.png"
         alt="Loading"
       />
-      <h1 className="text--semi-bold">
-        {/* Deleting */}
-        {message}
-      </h1>
+      <h1 className="text--semi-bold">{message}</h1>
     </main>
   );
 }
-
-// props
-// message:String eg. "Deleting"

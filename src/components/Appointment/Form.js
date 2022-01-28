@@ -69,33 +69,3 @@ export default function Form(props) {
     </main>
   );
 }
-
-// From Frances BreakOut
-// parent Component
-/* <Button danger onClick={() => console.log("what's up")}>Hello!</Button> */
-// props {danger:true, onClick:() => console.log("what's up")}
-// child Component
-// return <button style={buttonStyle} onClick={props.onClick}>{props.children}</button>;
-
-// As part of our Edit story, the Form component should take the following props:
-
-// student:String
-// interviewer:Number
-// interviewers:Array
-// onSave:Function
-// onCancel:Function
-// As part of our Create story, the Form component should take the following props:
-
-// interviewers:Array
-// onSave:Function
-// onCancel:Function
-
-// The Form component should track the following state:
-
-// student:String
-// interviewer:Number
-// The Form component should have the following actions:
-
-// setStudent:Function
-// setInterviewer:Function
-//

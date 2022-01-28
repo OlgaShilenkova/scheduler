@@ -24,15 +24,3 @@ describe("Appointment", () => {
     render(<Appointment />);
   });
 });
-
-/* If the Appointment component in your project has required props, then this is the place we need to fake them.
- */
-
-// # Apointment
-
-// - id
-// - time:
-// - interview
-// - interviewers
-// - bookInterview
-// - cancelInterview

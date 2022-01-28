@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 // if you use export default -> in test file import useVisualMode without {}
+// if export without default -> in test file import as object in {}
 
 export function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
@@ -14,12 +15,10 @@ export function useVisualMode(initial) {
       newHistory.pop();
       newHistory.push(newMode);
       setHistory(newHistory);
-      // setHistory((prev) => [...prev, newHistory]);
     } else {
       //add the new mode to our history array
       const newHistory = [...history, newMode];
       setHistory(newHistory);
-      // setHistory((prev) => [...prev, newHistory]);
     }
   }
 
@@ -31,7 +30,6 @@ export function useVisualMode(initial) {
     newHistory.pop();
     setMode(newHistory[newHistory.length - 1]);
     setHistory(newHistory);
-    // setHistory((prev) => [...prev, newHistory]);
   }
 
   return {

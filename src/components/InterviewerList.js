@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 
 function InterviewerList(props) {
   const { interviewers, onChange, value } = props;
-  //was
-  // const { interviewers, setInterviewer, interviewer } = props;
   const parsedInterviewerList = interviewers.map((currentInterviewer) => {
     return (
       <InterviewerListItem
@@ -25,7 +23,7 @@ function InterviewerList(props) {
     </section>
   );
 }
-//ReferenceError: PropTypes is not defined
+
 InterviewerList.propTypes = {
   interviewers: PropTypes.array.isRequired,
 };

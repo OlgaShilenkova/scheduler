@@ -40,22 +40,17 @@ export default function Appointment(props) {
 
   //Delete
   // -> confirm
-  function deleteInterview(student, interviewer) {
-    const interview = {
-      student,
-      interviewer,
-    };
+  function deleteInterview() {
     transition(CONFIRM);
   }
   //Confirm deletion of interview
   // spinner -> delete -> empty
-  function reallyDeleteInterview(event) {
-    console.log("props", props);
+  function reallyDeleteInterview() {
     transition(DELETING, true);
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch((error) => transition(ERROR_DELETE, true));
+      .catch(() => transition(ERROR_DELETE, true));
   }
 
   //Edit new interview
@@ -65,7 +60,6 @@ export default function Appointment(props) {
   return (
     <article className="appointment">
       <Header time={props.time} />
-
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
         <Show

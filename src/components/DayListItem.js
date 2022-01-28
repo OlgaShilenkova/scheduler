@@ -37,5 +37,3 @@ export default function DayListItem(props) {
     </li>
   );
 }
-// "no spots remaining"
-// "1 spot remaining"

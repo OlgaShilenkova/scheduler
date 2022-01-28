@@ -1,6 +1,6 @@
 import { getAppointmentsForDay, getInterview } from "helpers/selectors";
-// import  getAppointmentsForDay from "helpers/selectors";
 
+//moc data for tests
 const state = {
   days: [
     {
@@ -70,8 +70,6 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   const result = getAppointmentsForDay(state, "Wednesday");
   expect(result.length).toEqual(0);
 });
-
-//moc data and test for getInterview func
 
 test("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);

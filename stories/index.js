@@ -178,7 +178,7 @@ storiesOf("Appointment", module)
       <Appointment time="5pm" />
     </Fragment>
   ))
-  //Booked stiry
+  //Booked story
   .add("Appointment Booked", () => (
     <Fragment>
       <Appointment
@@ -189,13 +189,3 @@ storiesOf("Appointment", module)
       <Appointment time="5pm" />
     </Fragment>
   ));
-
-// student:String
-// interviewer:Number
-// interviewers:Array
-// onSave:Function
-// onCancel:Function
-
-// interviewers:Array
-// onSave:Function
-// onCancel:Function

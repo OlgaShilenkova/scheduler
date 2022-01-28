@@ -46,7 +46,7 @@ describe("Navigation", () => {
       .should("have.css", "background-color", "rgb(242, 242, 242)");
   });
 
-  //5
+  //6
   it("should navigate to Tuesday using special id and confirm the rigth selection  by class", () => {
     /*1. Go to root of our vebserver*/
     cy.visit("/");

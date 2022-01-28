@@ -15,7 +15,6 @@ export default function Application(props) {
     useApplicationData();
 
   const interviewers = getInterviewersForDay(state, state.day);
-
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -57,18 +56,3 @@ export default function Application(props) {
     </main>
   );
 }
-
-// for reference
-// state object
-// {
-//   day: "",
-//   days: [],
-//   appointments: {
-//     "1": {
-//       id: 1,
-//       time: "12pm",
-//       interview: null
-//     }
-//   },
-//   interviewers: {}
-// }

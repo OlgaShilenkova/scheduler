@@ -1,5 +1,4 @@
 import React from "react";
-
 import { render, cleanup } from "@testing-library/react";
 import { fireEvent } from "@testing-library/react";
 import Form from "components/Appointment/Form";
@@ -33,10 +32,12 @@ describe("Form", () => {
   it("validates that the student name is not blank", () => {
     /* 1. Create the mock onSave function */
     const onSave = jest.fn();
+
     /* 2. Render */
     const { getByText } = render(
       <Form interviewers={interviewers} student="" onSave={onSave} />
     );
+
     /*3. Click the save button */
     fireEvent.click(getByText("Save"));
 
