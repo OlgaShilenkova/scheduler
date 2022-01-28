@@ -9,15 +9,11 @@
 
 !["main view"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/main-view.png?raw=true)
 
-!["full view"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/full-view.png?raw=true)
-
 !["book appointment"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/book-appointment.png?raw=true)
 
 !["edit or cancel appointment"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/edit-or-cancel-appointment.png?raw=true)
 
 !["re-ask befor deletion"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/reask-about-deletion.png?raw=true)
-
-!["create appointment"](https://github.com/OlgaShilenkova/scheduler/blob/master/docs/create-appointment.png?raw=true)
 
 ## Technical Specifications
 
