@@ -13,21 +13,10 @@ export default function useApplicationData() {
   const setDay = (day) => setState({ ...state, day });
 
   // Update Interview Spots
-  function updateSpots(requestType) {
-    //reach to particular day
-    const rightDay = state.days.map((day) => {
-      if (day.name === state.day) {
-        //if we booking -> decrease spots number
-        if (requestType === "bookInterview") {
-          return { ...day, spots: day.spots - 1 };
-        } else {
-          return { ...day, spots: day.spots + 1 };
-        }
-      } else {
-        return { ...day };
-      }
+  function updateSpots() {
+    axios.get("/api/days").then((res) => {
+      setState((prev) => ({ ...prev, days: res.data }));
     });
-    return rightDay;
   }
 
   //Creating Appointment
@@ -52,10 +41,9 @@ export default function useApplicationData() {
       .put(`/api/appointments/${appointmentId}`, newAppointments[appointmentId])
       .then(() => {
         //update spot counter in days
-        days = updateSpots("bookInterview");
+        updateSpots();
         setState((prev) => ({ ...prev, appointments: newAppointments, days }));
-      })
-      .catch((error) => error.response);
+      });
   }
 
   //Deleting an Interview
@@ -73,15 +61,12 @@ export default function useApplicationData() {
     };
 
     //delete from db
-    return axios
-      .delete(`/api/appointments/${appointmentId}`)
-      .then(() => {
-        const days = updateSpots("deleteInterview");
-        setState((prev) => {
-          setState({ ...prev, appointments: newAppointments, days });
-        }); // does not impact having PREV or not
-      })
-      .catch((error) => error.response);
+    return axios.delete(`/api/appointments/${appointmentId}`).then(() => {
+      updateSpots();
+      setState((prev) => {
+        setState({ ...prev, appointments: newAppointments });
+      });
+    });
   }
   useEffect(() => {
     Promise.all([
